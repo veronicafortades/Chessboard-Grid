@@ -1,0 +1,230 @@
+@mixin zerop {
+  left: 0px;
+  top: 0px;
+}
+
+@mixin marginauto {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-top: 80px;
+}
+
+@mixin move-pos-fill {
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+@import "./container";
+@import "./variables";
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+html{
+    box-sizing: border-box;
+    background-image: url(https://media.istockphoto.com/vectors/wood-texture-background-vector-background-vector-id867802882?k=20&m=867802882&s=612x612&w=0&h=m7GnUGHfPRFJSiJEFl_hghHRpK7cpfNyBCNuugRhScg=);
+}
+
+
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+  
+  .title{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 100px auto;
+      font-family: $font-family;
+      font-size: 30px;
+      color: $color;
+      text-shadow: powderblue 1px 0 10px;
+      position: relative;
+  }
+  
+  .chessboard{
+    @include marginauto();
+      width: 800px;
+      height: 800px;
+      background-color: gray;
+      display: grid;
+      grid-template-columns: $grid-template;
+      grid-template-rows: $grid-template;
+      padding: 20px;
+      position: relative;
+      
+      
+      .square1:nth-child(odd),
+      .square2:nth-child(even) {
+        background-color: $mint-cream;
+
+      }
+  
+      .square1:nth-child(even),
+      .square2:nth-child(odd) {
+          background-color: paleturquoise;
+      }
+
+      .piece{
+          font-size: 45px;
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 0px;
+      }
+  }
+
+}
+
+
+
+
+//Animations
+
+#move1 {
+    @include move-pos-fill();
+    animation-name: frame1;
+    animation-duration: 2s;
+    
+  }
+  
+  @keyframes frame1 {
+    0% {
+      @include zerop();
+    }
+    100% {
+      left: 0px;
+      top: -90px;
+    }
+  }
+
+  #move2 {
+    @include move-pos-fill();
+    animation-name: frame2;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    
+  }
+  
+  @keyframes frame2 {
+    0% {
+      @include zerop();
+    }
+    100% {
+      left: 0px;
+      top: 90px;
+    }
+  }
+
+  #move3 {
+    @include move-pos-fill();
+    animation-name: frame3;
+    animation-duration: 3s;
+    animation-delay: 4s;
+  }
+  
+  @keyframes frame3 {
+    0% {
+      @include zerop();
+    }
+    100% {
+      left: -100px;
+      top: -180px;
+    }
+  }
+
+  #move4 {
+    @include move-pos-fill();
+    animation-name: frame4;
+    animation-duration: 3s;
+    animation-delay: 7s;
+  }
+  
+  @keyframes frame4 {
+    0% {
+      @include zerop();
+    }
+    100% {
+      left: 192px;
+      top: 185px;
+    }
+  }
+
+  #move5{
+    transition: 1s 1s;
+   }
+
+.board:hover #move5{
+       animation: queen 3s infinite 4s;
+
+@keyframes queen{
+       33%{
+           transform: translateY(-400%) translateX(500%);
+       }
+       100%{
+          transform: translateY(-700%) translateX(200%);
+       }
+   }  
+  }
+  //End region
+
+  //Media Query
+
+  @media screen and (max-width: 500px) {
+    .title{
+      font-size: 15px;
+    }
+    .chessboard{
+      width: 400px;
+      height: 400px;
+      background-color: gray;
+      display: grid;
+      grid-template-columns: $grid-template;
+      grid-template-rows: $grid-template;
+      padding: 10px;
+      margin-top: 80px;
+      position: relative;
+      margin-bottom: 50px;
+
+      .piece{
+          font-size: 27.5px;
+          text-align: center;
+          margin-top: 5px;
+          margin-bottom: 0px;
+      }
+
+  }
+}
+  @media screen and (max-width: 200px) {
+    .title{
+      font-size: 7.5px;
+
+    }
+    .chessboard{
+      width: 200px;
+      height: 200px;
+      background-color: gray;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: $grid-template;
+      grid-template-rows: $grid-template;
+      padding: 5px;
+      margin-top: 80px;
+      position: relative;
+      margin-bottom: 50px;
+
+      .piece{
+          font-size: 14px;
+          text-align: center;
+          margin-top: 2.5px;
+          margin-bottom: 0px;
+      }
+  }
+}  
